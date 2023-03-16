@@ -1,0 +1,26 @@
+version: '3'
+services:
+  app:
+    image: node:18
+    user: node
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - db
+    command: npm run dev && npm run build
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: mydb
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  dbdata:

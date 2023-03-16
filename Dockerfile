@@ -1,20 +1,19 @@
-# image de base
-FROM node:14-alpine
-
-# Répertoir de travail
+# Utilise l'image officielle Node.js comme base
+FROM node:18
+# Crée le répertoire de travail de l'application
 WORKDIR /app
 
-# Copie des fichier de l'app dans le conteneur
-COPY . .
+# Copie les fichiers de package.json et package-lock.json
+COPY package*.json ./
 
-# Installation des dépendances
+# Installe les dépendances de l'application
 RUN npm install
 
-# Construction de l'app
-RUN npm run build
+# Copie les fichiers de l'application
+COPY . .
 
-# Exposition du port 3000
+# Expose le port 3000 utilisé par l'application
 EXPOSE 3000
 
-# Commande à lancer au démarrage du conteneur
-CMD [ "npm", "start", "start:prod" ]
+# Démarre l'application
+CMD [ "npm", "start" ]
