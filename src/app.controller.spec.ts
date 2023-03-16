@@ -15,7 +15,7 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
+    it('should return a list of movies', () => {
       expect(appController.getMovies());
     });
   });
